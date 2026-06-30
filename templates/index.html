@@ -37,7 +37,217 @@ body{font-family:'Inter',sans-serif;background:#0f1117;color:#e2e8f0;min-height:
 .vw{border-color:rgba(245,158,11,.35)!important}
 .vd{border-color:rgba(239,68,68,.35)!important}
 @media(max-width:900px){.main-grid{grid-template-columns:1fr!important}}
-@media print{body{background:white!important;color:black!important}.no-print{display:none!important}}
+@media print {
+  /* Hide everything on screen */
+  body > * { display: none !important; }
+  #printReport { display: block !important; }
+
+  /* Page setup */
+  @page {
+    size: A4;
+    margin: 18mm 20mm 18mm 20mm;
+  }
+
+  /* Report base */
+  #printReport {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 11pt;
+    color: #000;
+    background: white;
+    width: 100%;
+  }
+
+  /* Header */
+  .pr-header {
+    border-bottom: 3px double #000;
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .pr-hospital-name {
+    font-size: 18pt;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+  }
+  .pr-hospital-sub {
+    font-size: 9pt;
+    color: #333;
+    margin-top: 2px;
+    letter-spacing: 0.3px;
+  }
+  .pr-report-id {
+    text-align: right;
+    font-size: 9pt;
+    color: #333;
+    line-height: 1.6;
+  }
+  .pr-report-title {
+    text-align: center;
+    margin: 10px 0 14px;
+    padding: 7px 0;
+    border-top: 1.5px solid #000;
+    border-bottom: 1.5px solid #000;
+  }
+  .pr-report-title h1 {
+    font-size: 13pt;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* Section label */
+  .pr-section-title {
+    font-size: 10pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    border-bottom: 1px solid #666;
+    padding-bottom: 3px;
+    margin: 14px 0 8px;
+  }
+
+  /* Two-column patient info */
+  .pr-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 24px;
+    font-size: 10.5pt;
+    margin-bottom: 4px;
+  }
+  .pr-info-row {
+    display: flex;
+    gap: 6px;
+    padding: 3px 0;
+    border-bottom: 0.5px dotted #ccc;
+  }
+  .pr-info-label { font-weight: bold; min-width: 110px; color: #000; }
+  .pr-info-value { color: #111; }
+
+  /* Risk box */
+  .pr-risk-box {
+    border: 2px solid #000;
+    padding: 10px 14px;
+    margin: 12px 0;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .pr-risk-score {
+    font-size: 28pt;
+    font-weight: bold;
+    min-width: 80px;
+    text-align: center;
+    line-height: 1;
+  }
+  .pr-risk-label { font-size: 14pt; font-weight: bold; }
+  .pr-risk-verdict { font-size: 10pt; margin-top: 4px; color: #222; }
+  .pr-risk-high { border-color: #000; }
+
+  /* Vitals table */
+  .pr-vitals-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10pt;
+    margin-top: 6px;
+  }
+  .pr-vitals-table thead tr {
+    background: #000;
+    color: white;
+  }
+  .pr-vitals-table th {
+    padding: 6px 10px;
+    text-align: left;
+    font-size: 9.5pt;
+    letter-spacing: 0.5px;
+  }
+  .pr-vitals-table td {
+    padding: 6px 10px;
+    border-bottom: 0.5px solid #ccc;
+  }
+  .pr-vitals-table tr:nth-child(even) td { background: #f5f5f5; }
+  .pr-abnormal { font-weight: bold; }
+  .pr-status-normal  { color: #1a7a1a; font-weight: 700; }
+  .pr-status-abnormal{ color: #c00000; font-weight: 700; }
+
+  /* Explanation box */
+  .pr-explanation-box {
+    border: 1px solid #888;
+    padding: 10px 14px;
+    margin-top: 6px;
+    font-size: 10.5pt;
+    line-height: 1.7;
+    color: #111;
+    background: #fafafa;
+  }
+
+  /* Actions list */
+  .pr-actions-list {
+    margin-top: 6px;
+    padding-left: 0;
+    list-style: none;
+  }
+  .pr-actions-list li {
+    padding: 4px 0 4px 16px;
+    border-bottom: 0.5px dotted #ddd;
+    font-size: 10pt;
+    position: relative;
+    line-height: 1.5;
+  }
+  .pr-actions-list li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    font-size: 9pt;
+    color: #555;
+  }
+
+  /* Disclaimer */
+  .pr-disclaimer {
+    margin-top: 18px;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    font-size: 8pt;
+    color: #555;
+    line-height: 1.5;
+    background: #f9f9f9;
+  }
+
+  /* Signature section */
+  .pr-signature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    margin-top: 28px;
+  }
+  .pr-sig-box {
+    border-top: 1px solid #000;
+    padding-top: 5px;
+    font-size: 9pt;
+    color: #333;
+  }
+  .pr-sig-label { font-weight: bold; font-size: 8.5pt; }
+
+  /* Footer */
+  .pr-footer {
+    margin-top: 20px;
+    border-top: 1.5px solid #000;
+    padding-top: 6px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 8pt;
+    color: #555;
+  }
+  .pr-page-watermark {
+    text-align: center;
+    font-size: 8pt;
+    color: #bbb;
+    margin-top: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+}
 </style>
 </head>
 <body>
@@ -462,6 +672,205 @@ body{font-family:'Inter',sans-serif;background:#0f1117;color:#e2e8f0;min-height:
 <footer class="no-print" style="text-align:center;padding:32px 24px;border-top:1px solid rgba(255,255,255,.05);margin-top:20px">
   <div style="font-size:12px;color:#334155;font-weight:600;letter-spacing:.1em;text-transform:uppercase">SepsisWatch AI &mdash; For Research &amp; Clinical Support Use Only</div>
 </footer>
+
+<!-- ===================== PRINT REPORT (hidden on screen) ===================== -->
+{% if result %}
+{% set abnormal_count = [] %}
+{% if result.vitals.Temp < 36.1 or result.vitals.Temp > 37.2 %}{% set _ = abnormal_count.append(1) %}{% endif %}
+{% if result.vitals.HR < 60 or result.vitals.HR > 100 %}{% set _ = abnormal_count.append(1) %}{% endif %}
+{% if result.vitals.BP_Systolic < 90 or result.vitals.BP_Systolic > 140 %}{% set _ = abnormal_count.append(1) %}{% endif %}
+{% if result.vitals.BP_Diastolic < 60 or result.vitals.BP_Diastolic > 90 %}{% set _ = abnormal_count.append(1) %}{% endif %}
+{% if result.vitals.WBC_Count < 4 or result.vitals.WBC_Count > 11 %}{% set _ = abnormal_count.append(1) %}{% endif %}
+{% if result.vitals.Lactate_mmol_L > 2.0 %}{% set _ = abnormal_count.append(1) %}{% endif %}
+{% set n_ab = abnormal_count | length %}
+
+<div id="printReport" style="display:none">
+
+  <!-- HEADER -->
+  <div class="pr-header">
+    <div>
+      <div class="pr-hospital-name">&#9658; SEPSISWATCH MEDICAL CENTER</div>
+      <div class="pr-hospital-sub">Department of Critical Care &amp; Intensive Medicine</div>
+      <div class="pr-hospital-sub">123 Healthcare Avenue, Medical District &nbsp;|&nbsp; Tel: +1 (800) 555-CARE</div>
+    </div>
+    <div class="pr-report-id">
+      <div><strong>Report ID:</strong> SW-{{ result.pid }}-{{ result.time | replace(' ', '') | replace(':', '') }}</div>
+      <div><strong>Generated:</strong> {{ result.time }}</div>
+      <div><strong>Department:</strong> ICU / Critical Care</div>
+      <div><strong>Report Type:</strong> AI-Assisted Clinical Assessment</div>
+    </div>
+  </div>
+
+  <!-- REPORT TITLE -->
+  <div class="pr-report-title">
+    <h1>Sepsis Risk Assessment Report</h1>
+  </div>
+
+  <!-- PATIENT INFORMATION -->
+  <div class="pr-section-title">Patient Information</div>
+  <div class="pr-info-grid">
+    <div class="pr-info-row">
+      <span class="pr-info-label">Patient ID:</span>
+      <span class="pr-info-value">{{ result.pid }}</span>
+    </div>
+    <div class="pr-info-row">
+      <span class="pr-info-label">Assessment Date:</span>
+      <span class="pr-info-value">{{ result.time }}</span>
+    </div>
+    <div class="pr-info-row">
+      <span class="pr-info-label">Ward / Unit:</span>
+      <span class="pr-info-value">ICU — Bed Assignment Pending</span>
+    </div>
+    <div class="pr-info-row">
+      <span class="pr-info-label">Ordering Clinician:</span>
+      <span class="pr-info-value">_______________________</span>
+    </div>
+    <div class="pr-info-row">
+      <span class="pr-info-label">Attending Physician:</span>
+      <span class="pr-info-value">_______________________</span>
+    </div>
+    <div class="pr-info-row">
+      <span class="pr-info-label">Clinical Protocol:</span>
+      <span class="pr-info-value">ICU Sepsis Screening v2.0</span>
+    </div>
+  </div>
+
+  <!-- RISK ASSESSMENT RESULT -->
+  <div class="pr-section-title">AI Risk Assessment Result</div>
+  <div class="pr-risk-box pr-risk-high">
+    <div class="pr-risk-score">{{ result.risk }}%</div>
+    <div>
+      <div class="pr-risk-label">
+        {% if result.risk >= 75 %}&#9632; CRITICAL — SEPSIS HIGHLY PROBABLE
+        {% elif result.risk >= 50 %}&#9650; HIGH — ELEVATED SEPSIS RISK
+        {% elif result.risk >= 25 %}&#9654; MODERATE — BORDERLINE, MONITOR CLOSELY
+        {% else %}&#9632; LOW — PATIENT CLINICALLY STABLE
+        {% endif %}
+      </div>
+      <div class="pr-risk-verdict">
+        Model: XGBoost Binary Classifier &nbsp;|&nbsp;
+        Abnormal Parameters: {{ n_ab }} / 6 &nbsp;|&nbsp;
+        Severity:
+        {% if n_ab >= 4 or result.risk >= 75 %}Critical
+        {% elif n_ab >= 2 or result.risk >= 50 %}High
+        {% elif n_ab >= 1 or result.risk >= 25 %}Moderate
+        {% else %}Low{% endif %}
+      </div>
+    </div>
+  </div>
+
+  <!-- VITAL SIGNS -->
+  <div class="pr-section-title">Recorded Vital Signs</div>
+  <table class="pr-vitals-table">
+    <thead>
+      <tr>
+        <th>Parameter</th>
+        <th>Recorded Value</th>
+        <th>Reference Range</th>
+        <th>Unit</th>
+        <th>Status</th>
+        <th>Interpretation</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% set vrows = [
+        ('Temperature',       result.vitals.Temp,           36.1, 37.2, '°C',     'Hypothermia / Fever indicates SIRS'),
+        ('Heart Rate',        result.vitals.HR,             60,   100,  'bpm',    'Tachycardia &gt;100 bpm suggests SIRS'),
+        ('BP Systolic',       result.vitals.BP_Systolic,    90,   140,  'mmHg',   'Hypotension &lt;90 indicates circulatory failure'),
+        ('BP Diastolic',      result.vitals.BP_Diastolic,   60,   90,   'mmHg',   'Elevated diastolic may indicate vascular resistance'),
+        ('WBC Count',         result.vitals.WBC_Count,      4,    11,   'K/µL',   'Leukocytosis / Leukopenia seen in infection'),
+        ('Lactate',           result.vitals.Lactate_mmol_L, 0,    2.0,  'mmol/L', 'Elevated lactate indicates tissue hypoperfusion')
+      ] %}
+      {% for param, val, lo, hi, unit, interp in vrows %}
+      {% set ab = val < lo or val > hi %}
+      <tr>
+        <td><strong>{{ param }}</strong></td>
+        <td class="{% if ab %}pr-abnormal{% endif %}">{{ val }}</td>
+        <td>{{ lo }} – {{ hi }}</td>
+        <td>{{ unit }}</td>
+        <td class="{% if ab %}pr-status-abnormal{% else %}pr-status-normal{% endif %}">
+          {% if ab %}ABNORMAL{% else %}NORMAL{% endif %}
+        </td>
+        <td style="font-size:9pt;color:#333">{% if ab %}{{ interp }}{% else %}Within normal limits{% endif %}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <!-- CLINICAL EXPLANATION -->
+  <div class="pr-section-title">AI-Generated Clinical Explanation</div>
+  <div class="pr-explanation-box">
+    <strong>RAG Clinical Justification (Flan-T5 + FAISS):</strong><br><br>
+    {{ result.explanation }}
+  </div>
+
+  <!-- RECOMMENDED ACTIONS -->
+  <div class="pr-section-title">Recommended Clinical Actions</div>
+  <ul class="pr-actions-list">
+    {% if result.risk >= 75 %}
+    <li>IMMEDIATE: Activate hospital sepsis bundle protocol (Surviving Sepsis Campaign guidelines).</li>
+    <li>Obtain blood cultures (×2 sets, peripheral + central) before antibiotic administration.</li>
+    <li>Administer broad-spectrum IV antibiotics within 1 hour of sepsis identification.</li>
+    <li>Begin IV fluid resuscitation — 30 mL/kg crystalloid bolus within 3 hours.</li>
+    <li>Measure serum lactate; repeat within 2 hours if initial &gt;2 mmol/L.</li>
+    <li>Monitor urine output hourly; target &gt;0.5 mL/kg/hr.</li>
+    <li>Alert senior clinician and consider ICU admission.</li>
+    {% elif result.risk >= 50 %}
+    <li>Escalate vital sign monitoring to every 30 minutes.</li>
+    <li>Notify attending physician and document clinical status.</li>
+    <li>Order repeat lactate, CBC with differential, CMP, blood cultures, and urinalysis.</li>
+    <li>Consider IV fluid challenge and reassess perfusion within 1 hour.</li>
+    <li>Review current medications for nephrotoxic agents.</li>
+    <li>Prepare for potential ICU transfer if condition deteriorates.</li>
+    {% elif result.risk >= 25 %}
+    <li>Increase monitoring frequency — vitals every 1 hour.</li>
+    <li>Repeat serum lactate in 2 hours and review CBC / metabolic panel.</li>
+    <li>Document clinical trends and reassess in 4 hours.</li>
+    <li>Ensure adequate IV access and hydration status.</li>
+    {% else %}
+    <li>Continue routine monitoring as per ward protocol (every 4–6 hours).</li>
+    <li>Reassess if clinical condition changes or new symptoms arise.</li>
+    <li>Document normal baseline for trending purposes.</li>
+    {% endif %}
+  </ul>
+
+  <!-- DISCLAIMER -->
+  <div class="pr-disclaimer">
+    <strong>IMPORTANT DISCLAIMER:</strong> This report is generated by an AI-assisted clinical decision support system (SepsisWatch AI v2.0) using an XGBoost machine learning model and a Retrieval-Augmented Generation (RAG) explanation module. This report is intended solely as a decision support tool and does not constitute a definitive medical diagnosis. All clinical decisions must be made by a licensed healthcare professional using comprehensive patient assessment. The institution and its staff bear full responsibility for all clinical decisions made on the basis of this report.
+  </div>
+
+  <!-- SIGNATURE SECTION -->
+  <div class="pr-signature-grid">
+    <div class="pr-sig-box">
+      <div style="height:32px"></div>
+      <div class="pr-sig-label">Clinician Signature</div>
+      <div>Name: _____________________</div>
+      <div>Date: _____________________</div>
+    </div>
+    <div class="pr-sig-box">
+      <div style="height:32px"></div>
+      <div class="pr-sig-label">Attending Physician Signature</div>
+      <div>Name: _____________________</div>
+      <div>Date: _____________________</div>
+    </div>
+    <div class="pr-sig-box">
+      <div style="height:32px"></div>
+      <div class="pr-sig-label">Department Head / Reviewer</div>
+      <div>Name: _____________________</div>
+      <div>Date: _____________________</div>
+    </div>
+  </div>
+
+  <!-- REPORT FOOTER -->
+  <div class="pr-footer">
+    <span>SepsisWatch Medical Center &nbsp;|&nbsp; Critical Care Department</span>
+    <span>Patient: {{ result.pid }} &nbsp;|&nbsp; {{ result.time }}</span>
+    <span>Page 1 of 1 &nbsp;|&nbsp; CONFIDENTIAL</span>
+  </div>
+  <div class="pr-page-watermark">Confidential Medical Record — Authorised Personnel Only</div>
+
+</div>
+{% endif %}
 
 <script>
 // Live clock
