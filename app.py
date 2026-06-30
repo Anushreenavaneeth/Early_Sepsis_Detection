@@ -32,7 +32,8 @@ def predict():
         "risk": int(result["Risk_Probability"] * 100),
         "label": result["Sepsis_Risk"],
         "explanation": result["Clinical_Explanation"],
-        "time": datetime.now().strftime("%d %b %Y %H:%M")
+        "time": datetime.now().strftime("%d %b %Y %H:%M"),
+        "vitals": patient_input
     }
 
     return render_template("index.html", result=frontend_result)
